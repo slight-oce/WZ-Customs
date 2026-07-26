@@ -1,0 +1,8 @@
+player_id,direction,from_rank,to_rank,visibility,reason,numbers_said
+idrxp,promote,8,9,public,"Only single-event standout of the tournament: 2.41 band deviations clear and 45.3% of his squad's kills, so it passes the share gate. Automatic under the standout rule.",standout
+dyna,promote,8,9,public,"11.47 pts/map, +5.33 over band, from an average placement of 6.67 - the lowest placement multiplier of anyone near the top. 49.5% kill share.",consistent-up
+gooey,promote,8,9,public,"10.90 pts/map, +4.76 over band. 8.00 kills and 4297 damage per map with 3.0 assists.",consistent-up
+kaiba,hold,8,8,public,Closest to a promotion without getting one. +3.23 over band and 41.4% kill share. Held for a second event under the two-tournament rule. Counts as one event toward a two-event move.,consistent-up
+camzy,hold,8,8,public,"+2.73 over band on the highest kill share in the field (49.4%), from a mid-table squad. Held for a second event. Counts as one event toward a two-event move.",none
+zag,hold,7,7,public,"Scored 2.12 band deviations above rank 7, but on 19.7% of his squad's kills - below the 30% share gate, so no automatic promotion. He plays with a different squad next event now that two of his team-mates have gone up, which is the fair test of it.",consistent-up (gated out of standout)
+lupin,hold,7,7,private,"0.67 kills per map against a band average of 2.86, 924 damage per map and zero assists across six maps. Flagged, not actioned - he entered the next tournament still at rank 7.",consistent-down
