@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customs — rankings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--field:#0B1418;--panel:#132229;--panel2:#0F1D23;--grid:#1E333C;
+ --ink:#DCE8EC;--mute:#7E9AA5;--up:#4FD6C4;--gold:#F2C14E;--warn:#E08A45;
+ --disp:"Barlow Condensed",Impact,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--field);color:var(--ink);font-family:var(--body);line-height:1.55;
+ -webkit-font-smoothing:antialiased}
+a{color:var(--up);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--up);outline-offset:2px}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px 80px}
+nav{position:sticky;top:0;z-index:20;background:rgba(11,20,24,.94);backdrop-filter:blur(8px);
+ border-bottom:1px solid var(--grid);margin-bottom:30px}
+.navin{max-width:940px;margin:0 auto;padding:13px 18px;display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+.brand{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:19px;
+ letter-spacing:.03em;color:var(--ink)}
+nav a.lk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+nav a.lk.on,nav a.lk:hover{color:var(--up);text-decoration:none}
+h1{font-family:var(--disp);font-weight:700;text-transform:uppercase;line-height:.94;
+ font-size:clamp(36px,8vw,68px);letter-spacing:-.01em;margin:14px 0 10px}
+h2{font-family:var(--disp);text-transform:uppercase;letter-spacing:.04em;font-size:22px;
+ font-weight:600;margin:38px 0 3px}
+.sub{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--mute);margin:0 0 16px}
+.lede{font-size:16px;color:var(--mute);max-width:62ch;margin:0 0 8px}
+.lede b{color:var(--ink);font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.c{background:var(--panel);border:1px solid var(--grid);border-left:3px solid var(--up);
+ border-radius:2px;padding:15px 16px}
+.c.hold{border-left-color:var(--gold)}
+.c .tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--up)}
+.c.hold .tag{color:var(--gold)}
+.c .nm{font-family:var(--disp);font-size:30px;font-weight:700;text-transform:uppercase;line-height:1;margin:5px 0 1px}
+.c .mv{font-family:var(--mono);font-size:12px;color:var(--mute);margin-bottom:9px}
+.c p{font-size:13px;color:var(--mute);margin:0}
+.bandbar{margin:0 0 9px}
+.bandbar .lb{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;
+ color:var(--mute);margin-bottom:4px}
+.bandbar .lb b{color:var(--ink);font-weight:600}
+.track{position:relative;height:22px;background:var(--panel2);border:1px solid var(--grid);border-radius:2px}
+.rng{position:absolute;top:0;bottom:0;background:rgba(79,214,196,.16);border-left:1px solid rgba(79,214,196,.5);
+ border-right:1px solid rgba(79,214,196,.5)}
+.avg{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--gold)}
+.you{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;
+ background:var(--up);border:2px solid var(--field);box-shadow:0 0 0 1px var(--up)}
+table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:12.5px}
+th{text-align:right;padding:8px 9px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--mute);border-bottom:1px solid var(--grid);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:7px 9px;text-align:right;border-bottom:1px solid rgba(30,51,60,.5)}
+tbody tr:hover{background:rgba(79,214,196,.05)}
+.bhead{font-family:var(--disp);text-transform:uppercase;font-size:17px;font-weight:600;
+ letter-spacing:.03em;margin:26px 0 2px}
+.bmeta{font-family:var(--mono);font-size:10.5px;color:var(--mute);margin-bottom:7px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));gap:1px;
+ background:var(--grid);border:1px solid var(--grid);border-radius:2px;margin:0 0 18px}
+.st{background:var(--panel);padding:12px 13px}
+.st .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute)}
+.st .v{font-family:var(--disp);font-size:29px;font-weight:700;line-height:1.05;margin-top:2px}
+.verdict{border:1px solid var(--grid);border-left:3px solid var(--gold);background:var(--panel);
+ padding:14px 16px;border-radius:2px;margin:0 0 18px}
+.verdict.near{border-left-color:var(--up)}
+.verdict h3{font-family:var(--disp);text-transform:uppercase;font-size:17px;font-weight:600;margin:0 0 5px}
+.verdict p{margin:0;font-size:13.5px;color:var(--mute)}
+.verdict p b{color:var(--ink);font-weight:500}
+.flagbox{border-left:2px solid var(--warn);padding:9px 0 9px 13px;margin:14px 0 0;
+ font-size:13px;color:var(--mute)}
+.q{border-left:1px solid var(--grid);padding-left:20px;margin:0}
+.q>div{margin:0 0 20px;position:relative}
+.q>div:before{content:"";position:absolute;left:-24.5px;top:8px;width:8px;height:8px;
+ background:var(--field);border:1.5px solid var(--up);border-radius:50%}
+.q h3{font-family:var(--disp);text-transform:uppercase;font-size:16px;font-weight:600;margin:0 0 4px}
+.q p{margin:0;font-size:14px;color:var(--mute)}
+code{font-family:var(--mono);font-size:12px;background:var(--panel);padding:1px 5px;
+ border-radius:2px;color:var(--gold)}
+.srch{width:100%;background:var(--panel2);border:1px solid var(--grid);border-radius:2px;
+ color:var(--ink);font-family:var(--mono);font-size:13px;padding:10px 12px;margin:0 0 16px}
+.srch:focus{outline:none;border-color:var(--up)}
+.back{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+footer{border-top:1px solid var(--grid);margin-top:54px;padding-top:16px;
+ font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.8}
+@media(max-width:560px){.wrap{padding:0 13px 60px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<nav><div class="navin">
+  <span class="brand">Customs</span>
+  <a class="lk" href="#/">Latest</a>
+  <a class="lk" href="#/players">Players</a>
+  <a class="lk" href="#/rules">How ranking works</a>
+</div></nav>
+<div class="wrap" id="app"></div>
+<footer><div class="wrap" style="padding:0">
+  Ranks are reviewed after every tournament from the scoreboards posted in
+  <b>#scores</b>. If a number here looks wrong, say so in Discord and it gets checked
+  against the original screenshot.<br>
+  Built from the match data at <a href="https://github.com/slight-oce/wz-customs">slight-oce/wz-customs</a>.
+</div></footer>
+<script>
+let DATA=null, T=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f=(v,d)=>v==null?'&mdash;':(+v).toFixed(d);
+const dateFmt=d=>{const p=d.split('-');
+  return p[2]+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+p[1]-1]+' '+p[0];};
+
+fetch('./data.json').then(r=>r.json()).then(j=>{
+  DATA=j; T=j.tournaments[j.tournaments.length-1]; route();
+}).catch(function(){$('#app').innerHTML='<h1>Not built yet</h1><p class="lede">Run '+
+  '<code>python scripts/build.py --public</code> and push.</p>';});
+
+addEventListener('hashchange',route);
+
+function route(){
+  if(!DATA)return;
+  const h=location.hash.replace(/^#\/?/,'').split('/');
+  document.querySelectorAll('nav a.lk').forEach(a=>a.classList.remove('on'));
+  let v;
+  if(h[0]==='rules'){v=rules(); mark(2);}
+  else if(h[0]==='players'){v=players(); mark(1);}
+  else if(h[0]==='p'&&h[1]){v=player(decodeURIComponent(h[1]));}
+  else {v=home(); mark(0);}
+  $('#app').innerHTML=v; scrollTo(0,0);
+  const s=$('#psearch');
+  if(s){s.addEventListener('input',function(e){filter(e.target.value);});s.focus();}
+}
+function mark(i){document.querySelectorAll('nav a.lk')[i].classList.add('on');}
+function name(id){const p=T.players.find(x=>x.id===id);return p?p.p:id;}
+
+function bands(){
+  const ks=Object.keys(T.bands).map(Number).sort(function(a,b){return b-a;});
+  const max=Math.max.apply(null,ks.map(function(k){return T.bands[k].hi;}))*1.05;
+  return ks.map(function(k){const b=T.bands[k];
+    return '<div class="bandbar">'+
+      '<div class="lb"><span>Rank <b>'+k+'</b> &middot; '+b.n+' players</span>'+
+      '<span>'+(b.small?(b.why||'no automatic movement')
+        :'avg <b>'+b.mean.toFixed(2)+'</b> &middot; standout <b>'+b.standout_at.toFixed(2)+'</b>')+
+      '</span></div>'+
+      '<div class="track">'+
+        '<div class="rng" style="left:'+(b.lo/max*100)+'%;width:'+((b.hi-b.lo)/max*100)+'%"></div>'+
+        '<div class="avg" style="left:'+(b.mean/max*100)+'%"></div>'+
+      '</div></div>';}).join('');
+}
+
+function home(){
+  const promos=T.decisions.filter(function(d){return d.direction==='promote';});
+  const holds=T.decisions.filter(function(d){return d.direction==='hold';});
+  return '<h1>Rank review<br>'+dateFmt(T.date)+'</h1>'+
+  '<p class="lede">'+T.teams.length+' squads over '+T.meta.map_count+' maps. Every player is '+
+  'measured against the average of <b>their own rank</b>, not against the field &mdash; so a '+
+  'rank 5 is never being compared to a rank 8.</p>'+
+  '<p class="lede"><a href="#/rules">How the ranking works &rarr;</a></p>'+
+  '<h2>Rank changes</h2><p class="sub">'+promos.length+' moved up this tournament</p>'+
+  '<div class="cards">'+promos.map(function(d){return '<div class="c">'+
+    '<div class="tag">Moved up</div><div class="nm">'+esc(name(d.player_id))+'</div>'+
+    '<div class="mv">'+d.from_rank+' &rarr; '+d.to_rank+'</div><p>'+esc(d.reason)+'</p></div>';}).join('')+'</div>'+
+  (holds.length?'<h2>Reviewed, no change</h2><p class="sub">Cleared one line but not moved &mdash; and why</p>'+
+   '<div class="cards">'+holds.map(function(d){return '<div class="c hold">'+
+     '<div class="tag">Held at '+d.from_rank+'</div><div class="nm">'+esc(name(d.player_id))+'</div>'+
+     '<div class="mv">no change</div><p>'+esc(d.reason)+'</p></div>';}).join('')+'</div>':'')+
+  '<h2>Where the ranks sit</h2><p class="sub">Average points per map by rank &middot; gold line = band average</p>'+
+  bands()+
+  '<p class="lede" style="margin-top:14px">Ranks 6 and 7 came out almost level this tournament ('+
+  T.bands['6'].mean+' and '+T.bands['7'].mean+'). If that repeats, the boundary gets looked at '+
+  'rather than the players.</p>'+
+  '<p class="lede"><a href="#/players">Look up any player &rarr;</a></p>';
+}
+
+function players(){
+  const ks=Object.keys(T.bands).map(Number).sort(function(a,b){return b-a;});
+  const un=T.players.filter(function(p){return !p.rk;});
+  return '<h1>Players</h1><p class="lede">Grouped by rank, alphabetical inside each. '+
+  'Tap a name for that player\'s full breakdown.</p>'+
+  '<input class="srch" id="psearch" placeholder="Filter by name…" autocomplete="off">'+
+  '<div id="plist">'+ks.map(function(k){
+    return group(k,T.players.filter(function(p){return p.rk===k;}));}).join('')+
+  (un.length?group('&mdash;',un,'no rank on record'):'')+'</div>';
+}
+function group(k,rows,note){
+  const b=T.bands[k];
+  return '<div class="grp"><div class="bhead">Rank '+k+'</div>'+
+    '<div class="bmeta">'+rows.length+' players'+
+      (b?' &middot; band average '+b.mean.toFixed(2)+' pts/map':'')+
+      (note?' &middot; '+note:'')+'</div>'+
+    '<table><thead><tr><th>Player</th><th>Maps</th><th>Kills/map</th><th>Avg place</th>'+
+    '<th>Kill share</th><th>Pts/map</th></tr></thead><tbody>'+
+    rows.slice().sort(function(a,b){return a.p.toLowerCase().localeCompare(b.p.toLowerCase());})
+      .map(function(p){return '<tr data-n="'+esc(p.p.toLowerCase())+'">'+
+      '<td><a href="#/p/'+encodeURIComponent(p.id)+'">'+esc(p.p)+'</a></td>'+
+      '<td>'+p.n+'</td><td>'+f(p.kpm,2)+'</td><td>'+f(p.plc,2)+'</td>'+
+      '<td>'+(p.ks==null?'&mdash;':p.ks.toFixed(1)+'%')+'</td><td>'+f(p.ppm,2)+'</td></tr>';}).join('')+
+    '</tbody></table></div>';
+}
+function filter(q){
+  q=q.trim().toLowerCase();
+  document.querySelectorAll('#plist tr[data-n]').forEach(function(tr){
+    tr.style.display=(!q||tr.dataset.n.indexOf(q)>-1)?'':'none';});
+  document.querySelectorAll('#plist .grp').forEach(function(g){
+    const any=[].slice.call(g.querySelectorAll('tr[data-n]')).some(function(t){
+      return t.style.display!=='none';});
+    g.style.display=any?'':'none';});
+}
+
+function player(id){
+  const p=T.players.find(function(x){return x.id===id;});
+  if(!p)return '<h1>Not found</h1><p class="lede"><a href="#/players">Back to players</a></p>';
+  const b=p.rk?T.bands[String(p.rk)]:null;
+  const gap=b?p.ppm-b.mean:null;
+  const dec=T.decisions.find(function(d){return d.player_id===id;});
+  const th=2.5;
+  let verdict;
+  if(dec&&dec.direction==='promote'){
+    verdict='<div class="verdict near"><h3>Promoted to rank '+dec.to_rank+'</h3><p>'+esc(dec.reason)+'</p></div>';
+  }else if(dec&&dec.direction==='hold'){
+    verdict='<div class="verdict"><h3>Considered, held at '+dec.from_rank+'</h3><p>'+esc(dec.reason)+'</p></div>';
+  }else if(gap!=null&&gap>=th){
+    verdict='<div class="verdict near"><h3>Above the review line this event</h3><p>You scored '+
+      '<b>+'+gap.toFixed(2)+'</b> over your band. Clearing that line in <b>two of any three '+
+      'tournaments</b> moves your rank. This event counts as one.</p></div>';
+  }else if(gap!=null){
+    verdict='<div class="verdict"><h3>No change this tournament</h3><p>Your band averaged '+
+      '<b>'+b.mean.toFixed(2)+'</b> and your median map was <b>'+p.med.toFixed(2)+'</b>. '+
+      'Neither review line was crossed.</p></div>';
+  }else{
+    verdict='<div class="verdict"><h3>No rank on record</h3><p>You aren\'t on the sign-up list '+
+      'for this event, so there\'s no band to compare against. Get seeded before the next one '+
+      'and these numbers start counting.</p></div>';
+  }
+  const flags=[];
+  if(p.imp)flags.push('<b>'+p.imp+'</b> of your '+p.n+' maps had a squad total posted but no '+
+    'scoreboard, so your share of those kills is estimated from your other maps. Post a squad '+
+    'scoreboard and it becomes exact.');
+  if(p.sqrank_vs_field!=null&&p.sqrank_vs_field<=-2)flags.push('Your squad\'s ranks totalled '+
+    '<b>'+p.sqrank+'</b> against a field median of '+T.meta.rank_sum_median+' &mdash; '+
+    Math.abs(p.sqrank_vs_field)+' light. That is recorded against this result and weighed in '+
+    'any review.');
+  if(p.n<T.meta.map_count)flags.push('You\'re recorded on <b>'+p.n+'</b> of '+T.meta.map_count+
+    ' maps &mdash; the rest you didn\'t play.');
+  const scale=b?b.hi*1.05:1;
+  return '<p class="back"><a href="#/players">&larr; All players</a></p>'+
+  '<h1>'+esc(p.p)+'</h1>'+
+  '<p class="lede">'+(p.rk?'Rank <b>'+p.rk+'</b>':'Unranked')+' &middot; '+esc(p.team)+
+    ' &middot; '+dateFmt(T.date)+'</p>'+
+  '<div class="stats">'+
+    '<div class="st"><div class="k">Points / map</div><div class="v">'+f(p.ppm,2)+'</div></div>'+
+    '<div class="st"><div class="k">Kills / map</div><div class="v">'+f(p.kpm,2)+'</div></div>'+
+    '<div class="st"><div class="k">Avg placement</div><div class="v">'+f(p.plc,1)+'</div></div>'+
+    '<div class="st"><div class="k">Kill share</div><div class="v">'+(p.ks==null?'&mdash;':p.ks.toFixed(0)+'%')+'</div></div>'+
+    '<div class="st"><div class="k">Maps</div><div class="v">'+p.n+'</div></div>'+
+    (p.sqrank?'<div class="st"><div class="k">Squad rank sum</div><div class="v">'+p.sqrank+'</div></div>':'')+
+  '</div>'+verdict+
+  (b?'<h2>You against rank '+p.rk+'</h2>'+
+   '<p class="sub">Where your points/map sits inside your own band</p>'+
+   '<div class="bandbar"><div class="lb"><span>Rank <b>'+p.rk+'</b> &middot; '+b.n+' players</span>'+
+   '<span>band average <b>'+b.mean.toFixed(2)+'</b></span></div><div class="track">'+
+   '<div class="rng" style="left:'+(b.lo/scale*100)+'%;width:'+((b.hi-b.lo)/scale*100)+'%"></div>'+
+   '<div class="avg" style="left:'+(b.mean/scale*100)+'%"></div>'+
+   '<div class="you" style="left:'+Math.min(p.ppm/scale*100,99)+'%"></div>'+
+   '</div></div>'+
+   '<p class="lede" style="font-size:14px">Kill share is how much of your squad\'s kills were '+
+   'yours &mdash; it\'s there so carrying a weak squad and riding a strong one don\'t look the '+
+   'same.</p>':'')+
+  (flags.length?'<div class="flagbox"><b>About your data</b><br>'+flags.join('<br><br>')+'</div>':'');
+}
+
+function rules(){
+  return '<h1>How ranking works</h1>'+
+  '<p class="lede">Published so it can be checked. Nothing below is decided after the fact '+
+  '&mdash; the rule is fixed before the tournament and applied to whatever the scoreboards say.</p>'+
+  '<h2>Scoring</h2><p class="sub">Per player, per map</p>'+
+  '<p class="lede">Your points for a map are <b>your own kills &times; your squad\'s placement '+
+  'multiplier</b>. Your kills, not the squad\'s &mdash; so a good game on a squad that goes out '+
+  'early still counts, and a quiet game on a winning squad doesn\'t hide.</p>'+
+  '<table><thead><tr><th>Placement</th><th>Multiplier</th></tr></thead><tbody>'+
+  '<tr><td>1st</td><td>1.6&times;</td></tr><tr><td>2nd &ndash; 5th</td><td>1.4&times;</td></tr>'+
+  '<tr><td>6th &ndash; 10th</td><td>1.2&times;</td></tr><tr><td>11th +</td><td>1.0&times;</td></tr>'+
+  '</tbody></table>'+
+  '<h2>Comparison</h2><p class="sub">Against your own rank, never the field</p>'+
+  '<p class="lede">Every rank has an average. Yours is compared to <b>that</b>, so being on a '+
+  'stacked squad or a weak one washes out. This tournament:</p>'+bands()+
+  '<h2>Your score for the night</h2>'+
+  '<p class="lede">Your <b>median map</b>, not your average. Line your six maps up and take the '+
+  'middle one. This matters: if you average them, giving up once you\'re out of contention drags '+
+  'your score down hard, and that shouldn\'t be a route to an easier rank. Tanking the last two '+
+  'maps of an event costs you <b>2.68</b> on an average and <b>0.35</b> on a median. There is '+
+  'nothing to gain by stopping.</p>'+
+  '<h2>Two ways up, one way down</h2>'+
+  '<p class="lede"><b>Standout.</b> Finish a single tournament <b>2.0 band deviations</b> clear '+
+  'and you go up on the spot &mdash; but only if you took at least <b>30%</b> of your squad\'s '+
+  'kills. An even three-way split is 33%, so the bar is just under carrying your share. A big '+
+  'score built on a strong squad does not promote you on its own.</p>'+
+  '<p class="lede"><b>Consistent.</b> <b>1.25 deviations</b> from your band, held for '+
+  '<b>two tournaments running</b>, moves you either way. This is the route for players who sit '+
+  'above or below their rank week after week without ever spiking.</p>'+
+  '<p class="lede"><b>There is no single-event demotion.</b> One bad night moves nobody, whatever '+
+  'your rank. Six maps is not enough to judge anyone on, and a rank you can lose in one night is '+
+  'a rank worth throwing away once you are out of contention.</p>'+
+  '<p class="lede">The lines are recomputed after every event rather than fixed, because bands '+
+  'are not the same width. A flat threshold would make promotion out of a tight rank nearly '+
+  'impossible and out of a wide one nearly automatic &mdash; last event a flat +2.50 was 0.8 '+
+  'deviations in rank 8 and 3.8 in rank 6.</p>'+
+  '<p class="lede">A demotion can still be set aside for a stated reason &mdash; coming back from '+
+  'a long break, illness, standing in for a squad short a player. The reason gets recorded '+
+  'either way.</p>'+
+  '<h2>Why some ranks don\'t move</h2>'+
+  '<p class="lede">This is an <b>'+T.meta.bracket+'</b> bracket &mdash; anyone under rank '+
+  (Number(T.meta.rank_cap)+1)+' can enter. In practice it fills with 8s and 7s, because those '+
+  'are the strongest players eligible. The few lower-ranked players who enter have chosen to '+
+  'play a field above themselves, so they are a self-selected group rather than a fair sample '+
+  'of their rank &mdash; measuring them against each other says very little.</p>'+
+  '<p class="lede">So <b>rank '+(Number(T.meta.movement_floor)-1)+' and below do not move '+
+  'automatically here</b>, however many turn up. Nor does any rank with fewer than five '+
+  'players present. Those stay a conversation rather than a calculation.</p>'+
+  '<h2>Who you played with</h2>'+
+  '<p class="lede">Lower-ranked players turn up to these &mdash; entry is cheap or free, some '+
+  'just enjoy it, and some are filling a spot so the tournament runs. That is welcome and it is '+
+  'not going to change, but it does mean rosters are not equal. Last event the ranks on a squad '+
+  'totalled anywhere from <b>'+T.meta.rank_sum_lo+'</b> to <b>'+T.meta.rank_sum_hi+'</b>, '+
+  'average '+T.meta.rank_sum_mean+'.</p>'+
+  '<p class="lede">Your squad\'s total is recorded next to your result and put in front of '+
+  'whoever reviews it. It is <b>not an automatic exemption</b> &mdash; a fixed cut-off would '+
+  'make one rank point the whole decision, and would be something you could build on purpose. '+
+  'It is weighed, and if it changes a decision that gets said out loud.</p>'+
+  '<p class="lede"><b>Kill share</b> is the other half of it. It shows how much of your squad\'s '+
+  'output was yours, so carrying a short-handed roster and being carried by a strong one do not '+
+  'read the same.</p>'+
+  '<h2>What this is for</h2>'+
+  '<p class="lede">Ranks exist so brackets are competitive and entry is priced fairly. Sitting '+
+  'below your real level means cheaper entry and access to capped events you have outgrown, so '+
+  'the review is there to keep the ladder honest &mdash; not to hand out prizes. A rank change '+
+  'is a correction, not a verdict on you.</p>'+
+  '<p class="lede">That is also why the score is your <b>median</b> map and why a single bad '+
+  'night never moves you down. Neither giving up mid-event nor quietly holding back across one '+
+  'gets you anywhere.</p>'+
+  '<h2>What moving up out of this bracket means</h2>'+
+  '<p class="lede">This series is <b>'+T.meta.bracket+'</b>. Being promoted past rank '+
+  T.meta.rank_cap+' means you have outgrown it and stop being eligible &mdash; that is the '+
+  'point of it, but it does mean going up is a real move and not a badge. It is why it takes '+
+  'two tournaments and not one.</p>'+
+  '<h2>The numbers shortlist, a person decides</h2>'+
+  '<p class="lede">Clearing the line puts you on the list. It is not automatic, because the '+
+  'measure has known blind spots &mdash; the clearest being that it cannot tell whether your '+
+  'points came from you or from the squad around you. Where the decision goes against what the '+
+  'numbers said, that gets published with the reasoning, on this site, under '+
+  '<a href="#/">the latest review</a>. You can see both and judge it.</p>'+
+  '<h2>What isn\'t used, and why</h2><div class="q">'+
+  '<div><h3>Redeploys</h3><p>It counts deaths you came back from, so dying early scores you '+
+  '<em>fewer</em> of them. Squads finishing 11th&ndash;15th averaged fewer redeploys than squads '+
+  'finishing 6th&ndash;10th. It measures how long you survived, not how well.</p></div>'+
+  '<div><h3>Damage</h3><p>Tried and dropped. It\'s only legible on about half the posted '+
+  'scoreboards, and transcribing it from photos of monitors proved unreliable enough that '+
+  'several early conclusions had to be reversed. It isn\'t used for any decision.</p></div>'+
+  '<div><h3>Eliminations</h3><p>Kills only. Eliminations count knocks that team-mates finish, '+
+  'which double-counts squad play.</p></div>'+
+  '<div><h3>Reputation</h3><p>Not a thing. Ranks move on what the scoreboards show.</p></div>'+
+  '</div>'+
+  '<h2>If you think a number is wrong</h2>'+
+  '<p class="lede">Say so in Discord with the map number. Every squad result is stored with the '+
+  'message it came from, so it gets checked against the original screenshot rather than argued '+
+  'about. Corrections are normal &mdash; several were made to this tournament after it was first '+
+  'scored.</p>'+
+  '<div class="flagbox"><b>The most common cause of a wrong number is a missing scoreboard.</b> '+
+  'If your squad posts a placement without a scoreboard, your individual kills have to be '+
+  'estimated from your other maps. Post the squad scoreboard and that never happens.</div>'+
+  '<h2>What isn\'t published here</h2>'+
+  '<p class="lede">Promotions and near-misses are public. Demotions aren\'t &mdash; being moved '+
+  'down is between you and the organisers. If you want the reasoning behind your own rank, ask '+
+  'and you\'ll get the full breakdown.</p>';
+}
+</script></body></html>
