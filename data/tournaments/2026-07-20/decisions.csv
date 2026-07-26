@@ -1,0 +1,7 @@
+player_id,direction,from_rank,to_rank,visibility,reason,numbers_said
+hazard,promote,8,9,public,"Only single-event standout of the tournament: 2.04 band deviations clear of rank 8, on 43.9% of his squad's kills, so it passes the share gate. 5.88 kills per map across eight maps. Automatic under the standout rule.",standout
+dyna,hold,9,9,public,"1.79 deviations above rank 9 on a 49.4% kill share - top of the field for a second tournament running. No move: he was promoted to 9 after the last event, and a rank change restarts the count.",consistent-up (clock reset)
+ankhas,hold,9,9,public,"1.79 deviations above rank 9 on 50.0% kill share, but from five maps before his squad withdrew. Counts as one event toward a move.",consistent-up
+vgl,hold,7,7,public,"1.46 deviations above rank 7 on 47.1% kill share. Counts as one event toward a move.",consistent-up
+trix,hold,9,9,public,"1.30 deviations above rank 9. Counts as one event toward a move.",consistent-up
+lupin,demote,7,6,private,"Below the rank 7 line at two consecutive tournaments: -1.41 on 19 Jul, -1.97 on 20 Jul. 1.25 kills per map against a band centre of 3.87, on a normal-strength roster both times.",consistent-down
