@@ -23,7 +23,7 @@ def main(shots):
             for r in csv.DictReader(open(f"{TDIR}/map_results.csv"))}
     found, unmapped = {}, []
     for fn in sorted(os.listdir(shots)):
-        m = re.match(r"(.+) Game (\d+)\.(png|jpg|jpeg)$", fn, re.I)
+        m = re.match(r"(.+) Game (\d+)\.(png|jpg|jpeg|webp)$", fn, re.I)
         if not m or m.group(1) not in REPORTER:
             unmapped.append(fn); continue
         sq, mp = REPORTER[m.group(1)], m.group(2)
