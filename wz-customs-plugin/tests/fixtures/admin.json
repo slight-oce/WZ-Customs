@@ -1,0 +1,104 @@
+{
+  "tournaments": [
+    {
+      "date": "2026-07-19",
+      "meta": {
+        "played_on": "2026-07-19",
+        "format": "Resurgence trios",
+        "map_count": "6",
+        "bracket": "8-",
+        "rank_cap": "8",
+        "movement_floor": "6",
+        "rank_sum_median": 22
+      },
+      "players": [
+        {
+          "p": "Dzire",
+          "id": "dzire",
+          "rk": 8,
+          "team": "Hardyy x Spicy x Dzire",
+          "n": 6,
+          "imp": 3,
+          "k": 8,
+          "kpm": 1.33,
+          "plc": 11.2,
+          "pts": 8.6,
+          "ppm": 1.43,
+          "med": 1.6,
+          "ks": 57.1,
+          "sqrank": 17,
+          "sqrank_vs_field": -5,
+          "standout": false,
+          "res": -3.82,
+          "sig": -1,
+          "z": -1.06,
+          "dpm": 1840,
+          "extn": 6,
+          "discord_id": "123456789012345678"
+        }
+      ],
+      "bands": {
+        "8": {
+          "mean": 5.42,
+          "n": 22,
+          "sd": 3.61,
+          "lo": 1.43,
+          "hi": 14.1,
+          "promote_at": 9.93,
+          "standout_at": 12.64,
+          "demote_at": 0.9,
+          "share_gate": 30.0,
+          "small": false,
+          "below_floor": false,
+          "why": null
+        }
+      },
+      "teams": [
+        { "t": "Hardyy x Spicy x Dzire", "pts": 40.2, "k": 33, "plc": 11.2 }
+      ],
+      "decisions": [
+        {
+          "player_id": "dzire",
+          "direction": "demote",
+          "from_rank": "8",
+          "to_rank": "7",
+          "visibility": "private",
+          "reason": "Two consecutive events below the line.",
+          "numbers_said": "consistent-down"
+        },
+        {
+          "player_id": "someone",
+          "direction": "demote",
+          "from_rank": "7",
+          "to_rank": "6",
+          "visibility": "public",
+          "reason": "Mismarked as public in the spreadsheet.",
+          "numbers_said": "consistent-down"
+        },
+        {
+          "player_id": "another",
+          "direction": "hold",
+          "from_rank": "8",
+          "to_rank": "8",
+          "visibility": "internal",
+          "reason": "Discussed but not announced.",
+          "numbers_said": "hold"
+        }
+      ]
+    }
+  ],
+  "carry_forward": {
+    "rule": "standout 2.0 SD + 30% kill share = immediate",
+    "dates": ["2026-07-19", "2026-07-20"],
+    "rows": [
+      {
+        "p": "Dzire",
+        "res": [-3.82, -2.9],
+        "flag": "DEMOTE",
+        "sqrank_vs_field": [-5, -3],
+        "kill_share": [57.1, 51.0],
+        "consider": ["short-handed squad at 2026-07-19 — weigh before acting"]
+      }
+    ]
+  }
+}

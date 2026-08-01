@@ -1,0 +1,102 @@
+{
+  "tournaments": [
+    {
+      "date": "2026-07-19",
+      "meta": {
+        "played_on": "2026-07-19",
+        "format": "Resurgence trios",
+        "map_count": "6",
+        "bracket": "8-",
+        "rank_cap": "8",
+        "movement_floor": "6",
+        "notes": "Rebirth Island M1-M3, Fortune's Keep M4-M6.",
+        "rank_sum_mean": 21.2,
+        "rank_sum_lo": 15,
+        "rank_sum_hi": 24,
+        "rank_sum_median": 22
+      },
+      "players": [
+        {
+          "p": "iDrxp",
+          "id": "idrxp",
+          "rk": 8,
+          "team": "Zag x Gooey x iDrxp",
+          "n": 6,
+          "imp": 0,
+          "k": 62,
+          "kpm": 10.33,
+          "plc": 3.5,
+          "pts": 84.6,
+          "ppm": 14.1,
+          "med": 13.0,
+          "ks": 45.3,
+          "sqrank": 23,
+          "sqrank_vs_field": 1,
+          "standout": true
+        },
+        {
+          "p": "Dzire",
+          "id": "dzire",
+          "rk": 8,
+          "team": "Hardyy x Spicy x Dzire",
+          "n": 6,
+          "imp": 3,
+          "k": 8,
+          "kpm": 1.33,
+          "plc": 11.2,
+          "pts": 8.6,
+          "ppm": 1.43,
+          "med": 1.6,
+          "ks": 57.1,
+          "sqrank": 17,
+          "sqrank_vs_field": -5,
+          "standout": false
+        }
+      ],
+      "bands": {
+        "8": {
+          "mean": 5.42,
+          "n": 22,
+          "sd": 3.61,
+          "lo": 1.43,
+          "hi": 14.1,
+          "promote_at": 9.93,
+          "standout_at": 12.64,
+          "demote_at": 0.9,
+          "share_gate": 30.0,
+          "small": false,
+          "below_floor": false,
+          "why": null
+        },
+        "5": {
+          "mean": 1.9,
+          "n": 5,
+          "sd": 0.89,
+          "lo": 0.5,
+          "hi": 2.8,
+          "promote_at": null,
+          "standout_at": null,
+          "demote_at": null,
+          "share_gate": 30.0,
+          "small": true,
+          "below_floor": true,
+          "why": "below the movement floor for a 8- bracket"
+        }
+      },
+      "teams": [
+        { "t": "Zag x Gooey x iDrxp", "pts": 188.0, "k": 137, "plc": 3.5 }
+      ],
+      "decisions": [
+        {
+          "player_id": "idrxp",
+          "direction": "promote",
+          "from_rank": "8",
+          "to_rank": "9",
+          "visibility": "public",
+          "reason": "Only single-event standout of the tournament.",
+          "numbers_said": "standout"
+        }
+      ]
+    }
+  ]
+}

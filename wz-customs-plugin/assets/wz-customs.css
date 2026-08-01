@@ -1,0 +1,382 @@
+/**
+ * WZ Customs front-end styles.
+ *
+ * Every rule is scoped under .wzc. A CMS plugin drops into somebody else's
+ * theme, so it must not restyle their headings, tables or links — and the theme
+ * will happily restyle ours, which is why the table and card rules are explicit
+ * rather than relying on anything inherited.
+ *
+ * The palette is inherited from the standalone site, but each colour falls back
+ * to a variable the host theme can override.
+ */
+
+.wzc {
+	--wzc-panel: #132229;
+	--wzc-panel2: #0f1d23;
+	--wzc-grid: #1e333c;
+	--wzc-ink: #dce8ec;
+	--wzc-mute: #7e9aa5;
+	--wzc-up: #4fd6c4;
+	--wzc-gold: #f2c14e;
+	--wzc-radius: 2px;
+
+	background: var(--wzc-panel2);
+	color: var(--wzc-ink);
+	padding: 20px;
+	border: 1px solid var(--wzc-grid);
+	border-radius: var(--wzc-radius);
+	margin: 0 0 24px;
+	line-height: 1.55;
+	overflow-wrap: break-word;
+}
+
+.wzc a {
+	color: var(--wzc-up);
+	text-decoration: none;
+}
+
+.wzc a:hover,
+.wzc a:focus {
+	text-decoration: underline;
+}
+
+.wzc :focus-visible {
+	outline: 2px solid var(--wzc-up);
+	outline-offset: 2px;
+}
+
+.wzc .wzc-h,
+.wzc .wzc-h3 {
+	color: var(--wzc-ink);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	font-weight: 700;
+	margin: 28px 0 3px;
+	line-height: 1.15;
+}
+
+.wzc .wzc-h {
+	font-size: 1.3rem;
+}
+
+.wzc .wzc-h3 {
+	font-size: 1.05rem;
+}
+
+.wzc > .wzc-h:first-child,
+.wzc .wzc-playername {
+	margin-top: 0;
+}
+
+.wzc .wzc-sub {
+	font-size: 0.72rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--wzc-mute);
+	margin: 0 0 16px;
+}
+
+.wzc .wzc-lede {
+	color: var(--wzc-mute);
+	max-width: 62ch;
+	margin: 0 0 12px;
+}
+
+.wzc .wzc-lede b {
+	color: var(--wzc-ink);
+	font-weight: 500;
+}
+
+.wzc .wzc-fine {
+	font-size: 0.85rem;
+	color: var(--wzc-mute);
+	max-width: 62ch;
+}
+
+.wzc .wzc-back {
+	margin: 0 0 8px;
+	font-size: 0.85rem;
+}
+
+/* Decision cards */
+
+.wzc .wzc-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 12px;
+}
+
+.wzc .wzc-card {
+	background: var(--wzc-panel);
+	border: 1px solid var(--wzc-grid);
+	border-left: 3px solid var(--wzc-up);
+	border-radius: var(--wzc-radius);
+	padding: 15px 16px;
+}
+
+.wzc .wzc-card.wzc-hold {
+	border-left-color: var(--wzc-gold);
+}
+
+.wzc .wzc-tag {
+	font-size: 0.62rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--wzc-up);
+}
+
+.wzc .wzc-card.wzc-hold .wzc-tag {
+	color: var(--wzc-gold);
+}
+
+.wzc .wzc-name {
+	font-size: 1.6rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	line-height: 1.05;
+	margin: 5px 0 1px;
+}
+
+.wzc .wzc-move {
+	font-size: 0.78rem;
+	color: var(--wzc-mute);
+	margin-bottom: 9px;
+}
+
+.wzc .wzc-card p {
+	font-size: 0.85rem;
+	color: var(--wzc-mute);
+	margin: 0;
+}
+
+/* Band bars */
+
+.wzc .wzc-bandbar {
+	margin: 0 0 14px;
+}
+
+.wzc .wzc-lb {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+	font-size: 0.75rem;
+	color: var(--wzc-mute);
+	margin-bottom: 4px;
+}
+
+.wzc .wzc-lb b {
+	color: var(--wzc-ink);
+	font-weight: 600;
+}
+
+.wzc .wzc-track {
+	position: relative;
+	height: 22px;
+	background: var(--wzc-panel2);
+	border: 1px solid var(--wzc-grid);
+	border-radius: var(--wzc-radius);
+}
+
+.wzc .wzc-rng {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background: rgba(79, 214, 196, 0.16);
+	border-left: 1px solid rgba(79, 214, 196, 0.5);
+	border-right: 1px solid rgba(79, 214, 196, 0.5);
+}
+
+.wzc .wzc-avg {
+	position: absolute;
+	top: -2px;
+	bottom: -2px;
+	width: 2px;
+	background: var(--wzc-gold);
+}
+
+.wzc .wzc-you {
+	position: absolute;
+	top: -4px;
+	bottom: -4px;
+	width: 3px;
+	background: var(--wzc-ink);
+}
+
+.wzc .wzc-bandnote {
+	font-size: 0.75rem;
+	color: var(--wzc-mute);
+	margin-top: 4px;
+}
+
+/* Tables */
+
+.wzc .wzc-scroll {
+	overflow-x: auto;
+}
+
+.wzc table.wzc-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0;
+	font-size: 0.88rem;
+	background: none;
+}
+
+.wzc table.wzc-table th,
+.wzc table.wzc-table td {
+	text-align: left;
+	padding: 7px 10px;
+	border: 0;
+	border-bottom: 1px solid var(--wzc-grid);
+	color: var(--wzc-ink);
+}
+
+.wzc table.wzc-table th {
+	font-size: 0.68rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--wzc-mute);
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.wzc table.wzc-table td + td,
+.wzc table.wzc-table th + th {
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+.wzc .wzc-grp {
+	margin: 0 0 26px;
+}
+
+.wzc .wzc-bhead {
+	font-size: 1.05rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.wzc .wzc-bmeta {
+	font-size: 0.72rem;
+	color: var(--wzc-mute);
+	margin-bottom: 7px;
+}
+
+.wzc .wzc-search {
+	width: 100%;
+	max-width: 320px;
+	background: var(--wzc-panel);
+	border: 1px solid var(--wzc-grid);
+	border-radius: var(--wzc-radius);
+	color: var(--wzc-ink);
+	padding: 8px 11px;
+	margin: 0 0 18px;
+	font: inherit;
+	font-size: 0.9rem;
+}
+
+.wzc .wzc-search::placeholder {
+	color: var(--wzc-mute);
+}
+
+/* Player page */
+
+.wzc .wzc-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	gap: 10px;
+	margin: 16px 0;
+}
+
+.wzc .wzc-st {
+	background: var(--wzc-panel);
+	border: 1px solid var(--wzc-grid);
+	border-radius: var(--wzc-radius);
+	padding: 11px 13px;
+}
+
+.wzc .wzc-k {
+	font-size: 0.62rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--wzc-mute);
+}
+
+.wzc .wzc-v {
+	font-size: 1.5rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	line-height: 1.2;
+}
+
+.wzc .wzc-verdict {
+	background: var(--wzc-panel);
+	border: 1px solid var(--wzc-grid);
+	border-left: 3px solid var(--wzc-mute);
+	border-radius: var(--wzc-radius);
+	padding: 14px 16px;
+	margin: 16px 0;
+}
+
+.wzc .wzc-verdict.wzc-near {
+	border-left-color: var(--wzc-up);
+}
+
+.wzc .wzc-verdict h3 {
+	margin: 0 0 5px;
+	font-size: 1rem;
+	color: var(--wzc-ink);
+}
+
+.wzc .wzc-verdict p {
+	margin: 0;
+	color: var(--wzc-mute);
+	font-size: 0.9rem;
+}
+
+.wzc .wzc-flagbox {
+	background: var(--wzc-panel);
+	border: 1px solid var(--wzc-grid);
+	border-left: 3px solid var(--wzc-gold);
+	border-radius: var(--wzc-radius);
+	padding: 13px 15px;
+	margin: 18px 0 0;
+	font-size: 0.85rem;
+	color: var(--wzc-mute);
+}
+
+.wzc .wzc-flagbox b {
+	color: var(--wzc-ink);
+}
+
+.wzc .wzc-flagbox p {
+	margin: 8px 0 0;
+}
+
+.wzc-empty p {
+	margin: 0 0 6px;
+	color: var(--wzc-mute);
+}
+
+.wzc .wzc-admin-only {
+	font-size: 0.8rem;
+	opacity: 0.85;
+}
+
+@media (max-width: 480px) {
+	.wzc {
+		padding: 14px;
+	}
+
+	.wzc .wzc-name {
+		font-size: 1.35rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wzc * {
+		transition: none !important;
+	}
+}

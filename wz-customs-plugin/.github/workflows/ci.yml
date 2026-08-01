@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 7.4 is the floor declared in the plugin header, so it is tested.
+        # A plugin that only works on the maintainer's PHP is not a plugin.
+        php: ['7.4', '8.0', '8.2', '8.4']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Syntax check every file
+        run: |
+          find . -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Privacy guard
+        run: php tests/test-privacy.php
+
+      - name: Render
+        run: php tests/test-render.php
