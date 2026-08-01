@@ -77,6 +77,7 @@ class WZC_Privacy {
 		'bracket',
 		'rank_cap',
 		'movement_floor',
+		'match_point',
 		'notes',
 		'rank_sum_mean',
 		'rank_sum_lo',

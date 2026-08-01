@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1UP+ Customs — live leaderboard</title>
+<meta name="description" content="Live standings, top fragging and match point for the 1UP+ Customs series.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--field:#0B1418;--panel:#132229;--panel2:#0F1D23;--grid:#1E333C;
+ --ink:#DCE8EC;--mute:#7E9AA5;--up:#4FD6C4;--gold:#F2C14E;--warn:#E08A45;--silver:#B8C9D0;--bronze:#C98B5E;
+ --disp:"Barlow Condensed",Impact,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;
+ --mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--field);color:var(--ink);font-family:var(--body);line-height:1.5;
+ -webkit-font-smoothing:antialiased}
+a{color:var(--up);text-decoration:none}
+:focus-visible{outline:2px solid var(--up);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px 70px}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(11,20,24,.94);backdrop-filter:blur(8px);
+ border-bottom:1px solid var(--grid)}
+.navin{max-width:1080px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:19px;letter-spacing:.03em}
+nav a.lk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+nav a.lk:hover{color:var(--up)}
+.live{margin-left:auto;display:flex;align-items:center;gap:7px;font-family:var(--mono);
+ font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--up);box-shadow:0 0 0 0 rgba(79,214,196,.6);
+ animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(79,214,196,.55)}70%{box-shadow:0 0 0 9px rgba(79,214,196,0)}
+ 100%{box-shadow:0 0 0 0 rgba(79,214,196,0)}}
+.dot.stale{background:var(--warn);animation:none}
+
+h1{font-family:var(--disp);font-weight:700;text-transform:uppercase;line-height:.94;
+ font-size:clamp(34px,7vw,62px);letter-spacing:-.01em;margin:20px 0 6px}
+h2{font-family:var(--disp);text-transform:uppercase;letter-spacing:.04em;font-size:22px;
+ font-weight:600;margin:40px 0 3px}
+.sub{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--mute);margin:0 0 16px}
+.meta{font-family:var(--mono);font-size:12px;color:var(--mute);margin:0 0 6px}
+.meta b{color:var(--ink)}
+
+/* Match point banner */
+.mpbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(242,193,78,.09);
+ border:1px solid rgba(242,193,78,.4);border-left:3px solid var(--gold);border-radius:2px;
+ padding:12px 15px;margin:18px 0 0}
+.mpbar .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.mpbar .who{font-family:var(--disp);font-size:24px;font-weight:700;text-transform:uppercase;line-height:1}
+.mpbar p{margin:0;font-size:13px;color:var(--mute);flex-basis:100%}
+
+/* Podium */
+.podium{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 0;align-items:end}
+.pod{background:var(--panel);border:1px solid var(--grid);border-top:3px solid var(--mute);
+ border-radius:2px;padding:15px 16px;position:relative}
+.pod.p1{border-top-color:var(--gold)}
+.pod.p2{border-top-color:var(--silver)}
+.pod.p3{border-top-color:var(--bronze)}
+.pod .pl{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--mute)}
+.pod.p1 .pl{color:var(--gold)}.pod.p2 .pl{color:var(--silver)}.pod.p3 .pl{color:var(--bronze)}
+.pod .nm{font-family:var(--disp);font-size:clamp(19px,2.4vw,27px);font-weight:700;text-transform:uppercase;
+ line-height:1.02;margin:5px 0 3px;word-break:break-word}
+.pod .pts{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--ink);line-height:1.1}
+.pod .pts span{font-size:11px;color:var(--mute);letter-spacing:.1em;text-transform:uppercase}
+.pod .ln{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:5px}
+.pod.p1{padding-bottom:26px}
+
+/* Tables */
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+ color:var(--mute);font-weight:600;text-align:right;padding:8px 9px;border-bottom:1px solid var(--grid);
+ white-space:nowrap}
+th:first-child,th.l{text-align:left}
+td{padding:9px;border-bottom:1px solid var(--grid);text-align:right;
+ font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px}
+td:first-child,td.l{text-align:left}
+tbody tr:hover{background:var(--panel2)}
+tr.mp td{background:rgba(242,193,78,.07)}
+.pos{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--mute);width:44px}
+tr.t1 .pos{color:var(--gold)}tr.t2 .pos{color:var(--silver)}tr.t3 .pos{color:var(--bronze)}
+.tm{font-family:var(--body);font-size:14px;color:var(--ink);font-weight:500}
+.roster{font-family:var(--mono);font-size:11px;color:var(--mute);margin-top:2px}
+.badge{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.12em;
+ text-transform:uppercase;color:var(--gold);border:1px solid rgba(242,193,78,.5);
+ border-radius:2px;padding:1px 5px;margin-left:7px;vertical-align:1px}
+.big{color:var(--ink);font-weight:600;font-size:15px}
+
+/* Kills leaderboard */
+.frag{display:grid;grid-template-columns:34px 1fr 54px;gap:10px;align-items:center;
+ padding:7px 0;border-bottom:1px solid var(--grid)}
+.frag .r{font-family:var(--disp);font-weight:700;font-size:16px;color:var(--mute);text-align:right}
+.frag:nth-child(1) .r{color:var(--gold)}
+.frag:nth-child(2) .r{color:var(--silver)}
+.frag:nth-child(3) .r{color:var(--bronze)}
+.frag .who{min-width:0}
+.frag .n{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frag .tm2{font-family:var(--mono);font-size:10px;color:var(--mute);white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis}
+.frag .bar{height:4px;background:var(--panel);border-radius:2px;margin-top:4px;overflow:hidden}
+.frag .bar i{display:block;height:100%;background:var(--up);opacity:.75}
+.frag .k{font-family:var(--mono);font-size:17px;font-weight:600;text-align:right}
+
+.cols{display:grid;grid-template-columns:1.55fr 1fr;gap:34px;align-items:start}
+.card{background:var(--panel2);border:1px solid var(--grid);border-radius:2px;padding:14px 16px}
+.mult{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.mult div{font-family:var(--mono);font-size:11px;color:var(--mute);background:var(--panel);
+ border:1px solid var(--grid);border-radius:2px;padding:4px 9px}
+.mult b{color:var(--up)}
+.note{font-size:13px;color:var(--mute);max-width:64ch}
+.err{background:rgba(224,138,69,.1);border:1px solid rgba(224,138,69,.45);border-left:3px solid var(--warn);
+ border-radius:2px;padding:13px 15px;margin:20px 0;font-size:14px}
+footer{margin-top:46px;padding-top:16px;border-top:1px solid var(--grid);
+ font-family:var(--mono);font-size:11px;color:var(--mute)}
+
+@media(max-width:820px){
+ .cols{grid-template-columns:1fr;gap:8px}
+ .podium{grid-template-columns:1fr}
+ .pod.p1{padding-bottom:15px}
+}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+</style>
+</head><body>
+
+<nav><div class="navin">
+  <span class="brand">1UP+ Customs</span>
+  <a class="lk" href="./">Rank review</a>
+  <span class="live"><span class="dot" id="dot"></span><span id="freshness">connecting…</span></span>
+</div></nav>
+
+<div class="wrap">
+  <h1 id="title">Live leaderboard</h1>
+  <p class="meta" id="submeta">Loading…</p>
+  <div id="content"></div>
+
+  <footer>
+    Points are squad kills multiplied by the placement multiplier for that map, summed across the
+    night. Entered on the 1UP+ scoring sheet and published from it &mdash; no figure on this page
+    is retyped by hand.
+    <span id="stamp"></span>
+  </footer>
+</div>
+
+<script>
+// The feed is written by scripts/import_xlsx.py straight from the scoring
+// workbook. It deliberately carries no rank or band information: those need the
+// roster reconciled against aliases.csv, which is not something anyone can do
+// between maps. This page therefore works on the night with nothing outstanding.
+var SRC = 'live.json';
+var POLL = 30000;
+var last = null, lastFetch = 0;
+
+function esc(s){ return String(s == null ? '' : s)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function n(v, dp){ return (v == null || isNaN(v)) ? '&mdash;' : Number(v).toFixed(dp == null ? 0 : dp); }
+function ord(i){
+  var s = ['TH','ST','ND','RD'], v = i % 100;
+  return i + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+function dateFmt(iso){
+  var t = Date.parse(iso);
+  if (isNaN(t)) return esc(iso);
+  var d = new Date(t);
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric', timeZone:'UTC' });
+}
+
+function render(d){
+  var teams = d.teams || [], players = d.players || [];
+  document.getElementById('title').textContent = 'Live leaderboard';
+  document.getElementById('submeta').innerHTML =
+    dateFmt(d.date) + ' &middot; <b>' + esc(d.bracket || '') + '</b> bracket &middot; <b>' +
+    teams.length + '</b> squads &middot; <b>' + n(d.maps_played) + '</b> maps played' +
+    (d.match_point ? ' &middot; match point <b>' + n(d.match_point, 0) + '</b>' : '');
+
+  var html = '';
+
+  var mp = teams.filter(function(t){ return t.matchpoint; });
+  if (mp.length){
+    html += '<div class="mpbar"><span class="lbl">On match point</span>' +
+      mp.map(function(t){ return '<span class="who">' + esc(t.label) + '</span>'; }).join('') +
+      '<p>Past ' + n(d.match_point, 0) + ' points. A win closes it out.</p></div>';
+  }
+
+  var pod = teams.slice(0, 3);
+  if (pod.length){
+    html += '<div class="podium">';
+    // Visual order 2-1-3 on wide screens so the leader sits centre; the DOM
+    // order stays 1-2-3 for anyone reading it linearly or with a screen reader.
+    var order = pod.length === 3 ? [1, 0, 2] : pod.map(function(_, i){ return i; });
+    order.forEach(function(idx){
+      var t = pod[idx];
+      html += '<div class="pod p' + (idx + 1) + '">' +
+        '<div class="pl">' + ord(idx + 1) + '</div>' +
+        '<div class="nm">' + esc(t.label) + '</div>' +
+        '<div class="pts">' + n(t.pts, 1) + ' <span>pts</span></div>' +
+        '<div class="ln">' + n(t.k) + ' kills &middot; avg place ' + n(t.plc, 2) +
+        (t.wins ? ' &middot; ' + t.wins + ' win' + (t.wins > 1 ? 's' : '') : '') + '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div class="cols"><div>';
+  html += '<h2>Standings</h2><p class="sub">All squads &middot; points, then kills</p>';
+  html += '<div class="tblwrap"><table><thead><tr>' +
+    '<th class="l">#</th><th class="l">Squad</th><th>Pts</th><th>Kills</th>' +
+    '<th>Maps</th><th>Avg place</th><th>Best</th></tr></thead><tbody>';
+  teams.forEach(function(t, i){
+    html += '<tr class="t' + (i + 1) + (t.matchpoint ? ' mp' : '') + '">' +
+      '<td class="pos">' + (i + 1) + '</td>' +
+      '<td class="l"><div class="tm">' + esc(t.label) +
+        (t.matchpoint ? '<span class="badge">match pt</span>' : '') + '</div>' +
+        (t.players && t.players.length ? '<div class="roster">' +
+          t.players.map(esc).join(' &middot; ') + '</div>' : '') + '</td>' +
+      '<td class="big">' + n(t.pts, 1) + '</td>' +
+      '<td>' + n(t.k) + '</td>' +
+      '<td>' + n(t.maps) + '</td>' +
+      '<td>' + n(t.plc, 2) + '</td>' +
+      '<td>' + (t.best == null ? '&mdash;' : ord(t.best)) + '</td>' +
+      '</tr>';
+  });
+  html += '</tbody></table></div>';
+
+  if (d.multipliers && d.multipliers.length){
+    html += '<h2>Placement multipliers</h2><p class="sub">Applied to that map&rsquo;s squad kills</p>' +
+      '<div class="mult">' + d.multipliers.map(function(m){
+        return '<div>' + esc(m.label) + ' <b>&times;' + m.x + '</b></div>';
+      }).join('') + '</div>';
+  }
+
+  html += '</div><div>';
+  html += '<h2>Top fragging</h2><p class="sub">Kills across every map</p><div class="card">';
+  var top = players.slice(0, 10);
+  var max = top.length ? top[0].k : 1;
+  top.forEach(function(p, i){
+    html += '<div class="frag"><div class="r">' + (i + 1) + '</div>' +
+      '<div class="who"><div class="n">' + esc(p.p) + '</div>' +
+      '<div class="tm2">' + esc(p.team) + '</div>' +
+      '<div class="bar"><i style="width:' + (max ? Math.round(p.k / max * 100) : 0) + '%"></i></div></div>' +
+      '<div class="k">' + n(p.k) + '</div></div>';
+  });
+  html += '</div>';
+  html += '<p class="note" style="margin-top:12px">Top fragging counts kills only. Points are a ' +
+    'squad figure &mdash; a big individual night on a squad that goes out early still shows here.</p>';
+  html += '</div></div>';
+
+  document.getElementById('content').innerHTML = html;
+}
+
+function freshness(){
+  var el = document.getElementById('freshness'), dot = document.getElementById('dot');
+  if (!lastFetch){ return; }
+  var secs = Math.round((Date.now() - lastFetch) / 1000);
+  var stale = secs > POLL / 1000 * 3;
+  dot.className = 'dot' + (stale ? ' stale' : '');
+  el.textContent = secs < 60 ? 'updated ' + secs + 's ago'
+    : 'updated ' + Math.round(secs / 60) + 'm ago';
+}
+
+function load(){
+  // Cache-bust: GitHub Pages will happily serve a stale copy for minutes, which
+  // on a leaderboard people are watching live is worse than showing nothing.
+  fetch(SRC + '?t=' + Date.now(), { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(d){
+      last = d; lastFetch = Date.now();
+      render(d);
+      document.getElementById('stamp').textContent =
+        ' Event ' + (d.date || '') + '.';
+      freshness();
+    })
+    .catch(function(e){
+      if (last){ freshness(); return; }   // keep showing the last good board
+      document.getElementById('submeta').textContent = '';
+      document.getElementById('content').innerHTML =
+        '<div class="err"><b>No live feed yet.</b><br>' +
+        'Expected <code>' + esc(SRC) + '</code> next to this page. Generate it with:<br><br>' +
+        '<code>python scripts/import_xlsx.py &lt;workbook.xlsx&gt; --date YYYY-MM-DD --live docs/live.json --live-only</code>' +
+        '<br><br><span style="opacity:.75">' + esc(e.message) + '</span></div>';
+      document.getElementById('freshness').textContent = 'no feed';
+      document.getElementById('dot').className = 'dot stale';
+    });
+}
+
+load();
+setInterval(load, POLL);
+setInterval(freshness, 1000);
+</script>
+</body></html>

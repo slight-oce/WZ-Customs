@@ -89,6 +89,43 @@ offered. Revoke it once the push lands — the script says so on completion.
 
 It reads `.gitignore`, so `admin/` never goes up.
 
+## The scoring workbook, and the live board
+
+Results are entered on the 1UP+ scoring spreadsheet on the night. `scripts/import_xlsx.py`
+reads that workbook directly, so the crossing from spreadsheet to repo is no longer a
+person retyping numbers — which is the one thing that has gone wrong before.
+
+```bash
+# on the night: regenerate the live feed after each map. Seconds, no roster work needed.
+python scripts/import_xlsx.py <workbook.xlsx> --date 2026-08-18 --live docs/live.json --live-only
+
+# afterwards: write the tournament CSVs for the rank review
+python scripts/import_xlsx.py <workbook.xlsx> --date 2026-08-18
+```
+
+**Nothing is written unless the workbook's own arithmetic reproduces.** The script rebuilds
+every team total from the atoms it just read — player cells sum to squad kills, squad kills
+times the placement multiplier gives map points, map points sum to the tournament total —
+and compares all three against what the sheet itself shows. A disagreement means the layout
+constants at the top of the script are pointing at the wrong cells, and it stops rather than
+writing plausible-looking rubbish. It is the same rule the squad-totals row enforces on the
+screenshots: two independent paths to one number.
+
+`docs/live.html` renders `docs/live.json` — podium, full standings, top fragging, and who is
+on match point — and re-fetches every 30 seconds.
+
+**The live board deliberately knows nothing about ranks or bands.** Those need the roster
+reconciled against `aliases.csv`, and deciding what `Chuffy/Rev/Stump` resolves to is a
+judgement call somebody has to make. That cannot happen between maps. So the live feed
+carries only what the workbook knows, and the band review stays a separate, later step.
+
+Two things the importer will not decide for you, and reports instead:
+
+- **Shared slots** (`Jords/Snakey`, `Clawssy/Stump`) — two people in one roster position.
+- **Parse artifacts** (`x Syzn`) — a team name that got split on the wrong delimiter upstream.
+
+Both need a person to say what they mean before they become `player_id`s.
+
 ## Adding a tournament
 
 1. `cp -r data/tournaments/2026-07-19 data/tournaments/<new-date>` and clear the rows.
