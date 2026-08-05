@@ -29,7 +29,7 @@ map_no,squad_id,player_id,kills,assists,redeploys,damage,confidence
 2,T02,rmax,16,3,2,5264,C
 2,T02,obricks,11,7,2,6405,C
 2,T02,chaddy,1,2,2,1034,C
-3,T02,rmax,0,4,2,7028,C
+3,T02,rmax,11,4,2,7028,K
 3,T02,chaddy,6,5,3,3972,C
 3,T02,obricks,9,5,3,4617,C
 4,T02,obricks,5,0,8,3308,C
@@ -152,7 +152,7 @@ map_no,squad_id,player_id,kills,assists,redeploys,damage,confidence
 3,T07,lupin,5,0,6,3519,C
 3,T07,lezafort,3,3,6,2146,C
 3,T07,manemerc,3,3,2,2759,C
-4,T07,lezafort,0,6,5,4547,C
+4,T07,lezafort,6,6,5,4547,K
 4,T07,lupin,8,2,4,3189,C
 4,T07,manemerc,2,4,6,2730,C
 5,T07,lezafort,6,2,4,2550,C

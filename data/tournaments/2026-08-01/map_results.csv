@@ -9,7 +9,7 @@ map_no,squad_id,placement,squad_kills,squad_assists,squad_redeploys,squad_damage
 8,T01,11,2,,,,U,,no screenshot - assists/redeploys/damage unavailable
 1,T02,11,10,5,4,5541,C,,
 2,T02,3,28,12,6,12703,C,,
-3,T02,1,15,14,8,15617,C,,
+3,T02,1,26,14,8,15617,K,,kills corrected from screenshot; source spreadsheet had 0 for one player
 4,T02,11,9,4,19,7201,C,,
 5,T02,1,24,9,15,12837,C,,
 6,T02,1,12,4,16,8319,C,,
@@ -50,7 +50,7 @@ map_no,squad_id,placement,squad_kills,squad_assists,squad_redeploys,squad_damage
 1,T07,7,21,8,24,12662,C,,
 2,T07,1,24,4,23,12124,C,,
 3,T07,8,11,6,14,8424,C,,
-4,T07,2,10,12,15,10466,C,,
+4,T07,2,16,12,15,10466,K,,kills corrected from screenshot; source spreadsheet had 0 for one player
 5,T07,11,12,8,13,8326,C,,
 6,T07,11,1,1,0,1190,C,,
 7,T07,10,12,3,14,6595,C,,
