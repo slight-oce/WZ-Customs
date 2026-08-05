@@ -1,0 +1,5 @@
+place_from,place_to,multiplier
+1,1,1.6
+2,5,1.4
+6,10,1.2
+11,99,1.0
