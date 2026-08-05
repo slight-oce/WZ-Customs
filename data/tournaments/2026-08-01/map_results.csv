@@ -30,7 +30,7 @@ map_no,squad_id,placement,squad_kills,squad_assists,squad_redeploys,squad_damage
 5,T04,10,19,5,2,10018,C,,
 6,T04,3,19,10,14,12626,C,,
 7,T04,12,0,,,,U,,no screenshot - assists/redeploys/damage unavailable
-8,T04,2,0,,,,U,,no screenshot - assists/redeploys/damage unavailable
+8,T04,2,,,,,U,,"no kills recorded in the source spreadsheet and no screenshot - kills unknown, not zero"
 1,T05,8,7,4,22,5617,C,,
 2,T05,12,5,2,7,3339,C,,
 3,T05,9,6,1,22,7574,C,,
@@ -94,4 +94,4 @@ map_no,squad_id,placement,squad_kills,squad_assists,squad_redeploys,squad_damage
 5,T12,4,12,5,15,8170,C,,
 6,T12,6,7,4,14,6328,C,,
 7,T12,7,8,2,23,6120,C,,
-8,T12,3,0,,,,U,,no screenshot - assists/redeploys/damage unavailable
+8,T12,3,,,,,U,,"no kills recorded in the source spreadsheet and no screenshot - kills unknown, not zero"
