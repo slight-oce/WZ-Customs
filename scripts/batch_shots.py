@@ -27,8 +27,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src")
     ap.add_argument("--out", default="montages")
-    ap.add_argument("--per", type=int, default=6)
+    ap.add_argument("--per", type=int, default=6, help="max tiles per montage")
     ap.add_argument("--width", type=int, default=1500)
+    ap.add_argument("--maxh", type=int, default=2100,
+                    help="max montage height in px; tiles are packed to stay legible "
+                         "after the reader downscales to ~2000px")
     a = ap.parse_args()
     files = []
     for root, _, names in os.walk(a.src):
@@ -39,14 +42,21 @@ def main():
     if not files:
         print(f"no images under {a.src}"); return 1
     os.makedirs(a.out, exist_ok=True)
+    # pre-scale every tile, then pack greedily under both the count and height caps
+    prepped = []
+    for f in files:
+        im = band(Image.open(f).convert("RGB"))
+        im = im.resize((a.width, int(im.height * a.width / im.width)), Image.LANCZOS)
+        prepped.append((os.path.relpath(f, a.src), im))
+    groups, cur, h = [], [], 0
+    for lab, im in prepped:
+        th = im.height + 26
+        if cur and (len(cur) >= a.per or h + th > a.maxh):
+            groups.append(cur); cur, h = [], 0
+        cur.append((lab, im)); h += th
+    if cur: groups.append(cur)
     n = 0
-    for i in range(0, len(files), a.per):
-        chunk = files[i:i + a.per]
-        tiles = []
-        for f in chunk:
-            im = band(Image.open(f).convert("RGB"))
-            im = im.resize((a.width, int(im.height * a.width / im.width)), Image.LANCZOS)
-            tiles.append((os.path.relpath(f, a.src), im))
+    for tiles in groups:
         H = sum(t[1].height + 26 for t in tiles)
         out = Image.new("RGB", (a.width + 16, H), (20, 20, 20))
         d = ImageDraw.Draw(out)
@@ -58,8 +68,9 @@ def main():
         n += 1
         p = os.path.join(a.out, f"batch_{n:02d}.png")
         out.save(p)
-        print(f"{p}  {len(chunk)} shots  {out.size[0]}x{out.size[1]}")
-    print(f"\n{len(files)} screenshots -> {n} montages ({a.per} per image)")
+        print(f"{p}  {len(tiles)} shots  {out.size[0]}x{out.size[1]}")
+    print(f"\n{len(files)} screenshots -> {n} montages "
+          f"(<= {a.per} tiles and <= {a.maxh}px each)")
     return 0
 
 if __name__ == "__main__":
